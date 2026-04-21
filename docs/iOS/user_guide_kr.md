@@ -112,7 +112,7 @@ GhostPass SDK는 **GitHub 저장소**를 통해 배포됩니다.
 2. 검색창에 아래 저장소 URL을 입력합니다.
 
 ```
-https://github.com/ghostpass-ai/ghostpass-sdk-distribution
+https://github.com/ghostpass-ai/ghostpass-sdk-distribution-dev
 ```
 
 3. **Dependency Rule**을 선택합니다. (권장: `Up to Next Major Version`)

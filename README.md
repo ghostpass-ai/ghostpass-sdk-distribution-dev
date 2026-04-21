@@ -19,7 +19,7 @@
 ## 저장소 구조
 
 ```
-ghostpass-sdk-distribution/
+ghostpass-sdk-distribution-dev/
 ├── docs/
 │   ├── iOS/
 │   │   └── user_guide_kr.md        # iOS 유저 SDK 연동 가이드
@@ -487,7 +487,6 @@ GhostPass 담당자에게 아래 정보를 전달해 주세요.
 - 담당자 이메일
 
 ### 3.2 설치
-> dev에서는 SPM만 제공됩니다 :)
 
 #### Swift Package Manager (SPM)
 
@@ -496,7 +495,7 @@ GhostPass 담당자에게 아래 정보를 전달해 주세요.
 **2.** 검색창에 아래 URL을 입력합니다.
 
 ```
-https://github.com/ghostpass-ai/ghostpass-sdk-distribution
+https://github.com/ghostpass-ai/ghostpass-sdk-distribution-dev
 ```
 
 **3.** 버전 규칙을 선택하고 **Add Package** 를 클릭합니다.
@@ -510,7 +509,7 @@ https://github.com/ghostpass-ai/ghostpass-sdk-distribution
 ```ruby
 target 'YourApp' do
   use_frameworks!
-  pod 'GoPassSDK', '~> {VERSION}'
+  pod 'GoPassSDK-Dev', '~> {VERSION}'
 end
 ```
 
