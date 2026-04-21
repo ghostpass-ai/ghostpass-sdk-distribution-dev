@@ -106,9 +106,9 @@ initialize(context, apiKey, kioskId, beaconConfig)
 
 | 대상 | 배포 Variant | 저장소 | Artifact |
 |------|-------------|--------|----------|
-| 파트너사 | `prodRelease` | Public Pages | `com.ghostpass:gopass-kiosk-sdk:1.0.0` |
+| 파트너사 | `devRelease` | Public Pages | `com.ghostpass:gopass-kiosk-sdk-dev:1.0.0` |
 
-### 2.1 파트너사용 사용자(`prodRelease`)
+### 2.1 파트너사용 사용자(`devRelease`)
 
 파트너사 SDK는 모두 Public Pages 저장소를 사용합니다.
 
@@ -121,67 +121,19 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url = uri("https://ghostpass-ai.github.io/ghostpass-sdk-distribution/")
+            url = uri("https://ghostpass-ai.github.io/ghostpass-sdk-distribution-dev/kiosk-sdk")
         }
     }
 }
 ```
 
 `app/build.gradle.kts`
-
-운영용(`prodRelease`) 연동:
-
-```kotlin
-dependencies {
-    implementation("com.ghostpass:gopass-kiosk-sdk:1.0.0")
-}
-```
 
 개발용 공개 빌드(`devRelease`) 연동:
 
 ```kotlin
 dependencies {
     implementation("com.ghostpass:gopass-kiosk-sdk-dev:1.0.0")
-}
-```
-
-### 2.2 사내 전용 사용자(`devDebug`)
-
-사내 개발/테스트용 `devDebug` 아티팩트만 GitHub Packages 인증이 필요합니다.
-
-`~/.gradle/gradle.properties`
-
-```properties
-gpr.user=YOUR_GITHUB_USERNAME
-gpr.key=YOUR_GITHUB_PAT_CLASSIC
-```
-
-`settings.gradle.kts`
-
-```kotlin
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.github.com/ghostpass-ai/ghostpass-sdk-distribution-dev")
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull
-                    ?: System.getenv("GITHUB_USERNAME")
-                password = providers.gradleProperty("gpr.key").orNull
-                    ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-}
-```
-
-`app/build.gradle.kts`
-
-```kotlin
-dependencies {
-    implementation("com.ghostpass:gopass-kiosk-sdk-dev-debug:1.0.0")
 }
 ```
 
@@ -223,7 +175,7 @@ GhostPass 담당자에게 다음 정보를 전달합니다.
 
 | 구분 | 저장소 | Artifact |
 |------|--------|----------|
-| 파트너사용 | `https://ghostpass-ai.github.io/ghostpass-sdk-distribution/` | `com.ghostpass:gopass-kiosk-sdk:1.0.0` |
+| 파트너사용 | `https://ghostpass-ai.github.io/ghostpass-sdk-distribution/kiosk-sdk` | `com.ghostpass:gopass-kiosk-sdk-dev:1.0.0` |
 
 ### 3.2 API Key 관리
 
@@ -307,7 +259,7 @@ suspend fun initialize(
 
 `initialize()` 성공 후 인증 준비 상태와 서버 연결은 SDK가 자동 관리합니다.
 
-현재 2.0.0 기준:
+현재 1.0.0 기준:
 
 - 별도의 연결 상태 조회 API는 제공하지 않습니다.
 - 앱에서는 `initialize()` 성공 여부와 `detection()`/`submitPhoneAuth()` 결과만 기준으로 연동하면 됩니다.
@@ -362,7 +314,7 @@ sealed class GoPassAuthResult {
 | `LIVENESS_NOT_CONFIRMED` | Liveness 수집 중 |
 | `LIVENESS_TX_FAILED` | Liveness 실패 |
 | `NO_SESSION` | 인증 대기 세션 없음 |
-| `ALREADY_IN_PROGRESS` | 다른 인증 진행 중 |
+| `ALREADY_IN_PROGRESS` | 인증 진행 중 |
 | `OOM` | 메모리 부족 |
 | `UNKNOWN` | 기타 일시 오류 |
 
@@ -412,7 +364,7 @@ suspend fun submitPhoneAuth(deviceId: String): GoPassAuthResult
 | 결과 | 설명 |
 |------|------|
 | `Success` | 휴대폰 인증 성공 |
-| `PrecheckGuide(ALREADY_IN_PROGRESS)` | 다른 인증과 충돌 |
+| `PrecheckGuide(ALREADY_IN_PROGRESS)` | 인증 진행 중 |
 | `ServerAuthFailed(GP101)` | 결과 대기 시간 초과 |
 | `ServerAuthFailed(GP102)` | 인증 거절 |
 | `ServerAuthFailed(GP103)` | 기타 인증 흐름 오류 |
@@ -556,8 +508,6 @@ when (val result = GoPassKioskSdk.detection(nv21, width, height, rotation)) {
     is GoPassAuthResult.ServerAuthFailed -> showError(result.message)
 }
 ```
-
----
 
 ---
 
