@@ -292,7 +292,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url = uri("https://ghostpass-ai.github.io/ghostpass-sdk-distribution/")
+            url = uri("https://ghostpass-ai.github.io/ghostpass-sdk-distribution-dev/kiosk-sdk")
         }
     }
 }
@@ -302,7 +302,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.ghostpass:gopass-kiosk-sdk:1.0.0")
+    implementation("com.ghostpass:gopass-kiosk-sdk-dev:1.0.0")
 }
 ```
 
@@ -314,6 +314,7 @@ dependencies {
 
 <!-- 카메라 (얼굴 인증) -->
 <uses-permission android:name="android.permission.CAMERA" />
+
 ```
 
 > Android 12 (API 31) 이상에서는 `BLUETOOTH_ADVERTISE` 권한을 **런타임**에 직접 요청해야 합니다.
@@ -346,7 +347,20 @@ CoroutineScope(Dispatchers.IO).launch {
         )
         // 초기화 완료 — 인증 준비 상태 
     } catch (e: GoPassSdkException) {
-        Log.e(TAG, "초기화 실패: code=${e.code}, message=${e.message}")
+        Log.e(TAG, "초기화 실패: $e")
+        // [GP006] 초기화 중 문제가 발생하였습니다. (Internal: IN-1300)
+        val code = e.code
+        val message = e.message
+        val internalCode = e.causeCode
+
+        when (e.code) {
+          "GP001" -> {
+              // invalid argument 처리
+          }
+          else -> {
+              // 공통 처리
+          }
+      }
     }
 }
 ```
@@ -651,7 +665,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url = uri("https://ghostpass-ai.github.io/ghostpass-sdk-distribution/")
+            url = uri("https://ghostpass-ai.github.io/ghostpass-sdk-distribution/user-sdk")
         }
     }
 }
@@ -661,7 +675,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.ghostpass:gopass-user-sdk:1.0.0")
+    implementation("com.ghostpass:gopass-user-sdk-dev:1.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 }
 ```
@@ -701,6 +715,11 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
     )
 }
 ```
+
+`ACCESS_BACKGROUND_LOCATION` 은 Android 10+에서 별도 2단계 요청이 필요하며,
+  반드시 위치 권한을 **'항상 허용'** 으로 받아야 앱 종료 후에도 비콘 감지가 동작합니다.
+  또한 HandsFree 안정 동작을 위해 블루투스/위치 서비스 활성화와
+  배터리 최적화 제외를 권장합니다.
 
 ### 4.4 SDK 초기화
 
