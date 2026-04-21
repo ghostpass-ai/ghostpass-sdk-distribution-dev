@@ -42,7 +42,7 @@ SDK를 연동하기 전에 아래 단계를 먼저 완료해야 합니다.
 
 ### 1.1 관리 포털 가입
 
-GhostPass는 파트너사별 전용 관리 포털([sdk-admin.ghostpass.ai](https://sdk-admin.ghostpass.ai/login))을 제공합니다.
+GhostPass는 파트너사별 전용 관리 포털([sdk-admin.ghostpass.ai](https://dev-sdk-admin.ghostpass.ai/login))을 제공합니다.
 
 | 단계 | 설명 |
 |------|------|
