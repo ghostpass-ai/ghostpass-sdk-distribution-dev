@@ -816,7 +816,7 @@ try {
 ## 7. FAQ
 
 **Q1. 비콘이 감지되지 않습니다.**
-A. 생체 정보 인증 데이터가 저장되어 있는지 확인해주세요. 생체 정보가 없으면 비콘 감지를 시작하지 않습니다. 또한 Android 12 이상에서는 `BLUETOOTH_SCAN` + `BLUETOOTH_CONNECT` 런타임 권한이, Android 10 이상에서는 `ACCESS_BACKGROUND_LOCATION`이 필요합니다.
+A. 생체 정보 인증 데이터가 저장되어 있는지 확인해주세요. 생체 정보가 없으면 비콘 감지를 시작하지 않습니다. 또한 Android 12 이상에서는 `BLUETOOTH_SCAN` 런타임 권한이, Android 10 이상에서는 `ACCESS_BACKGROUND_LOCATION`이 필요합니다.
 
 ---
 
