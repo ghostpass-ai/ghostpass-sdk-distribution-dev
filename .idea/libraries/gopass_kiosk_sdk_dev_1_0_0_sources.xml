@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gopass-kiosk-sdk-dev-1.0.0-sources">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/kiosk-sdk/com/ghostpass/gopass-kiosk-sdk-dev/1.0.0/gopass-kiosk-sdk-dev-1.0.0-sources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
