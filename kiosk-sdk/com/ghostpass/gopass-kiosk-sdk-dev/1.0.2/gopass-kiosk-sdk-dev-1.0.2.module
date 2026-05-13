@@ -1,0 +1,173 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.ghostpass",
+    "module": "gopass-kiosk-sdk-dev",
+    "version": "1.0.2",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "devReleaseVariantDevReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gopass-kiosk-sdk-dev-1.0.2.aar",
+          "url": "gopass-kiosk-sdk-dev-1.0.2.aar",
+          "size": 44724228,
+          "sha512": "d4dd8ed340208b330c332d1a6736f267573fcce6536a873fca3dcdd8540348471b785a39fb6454e893822fac3efb907344d02eca371abc1f1fa5fc6760f0341b",
+          "sha256": "41be6c3d1a5258ccadd93318b6ddae6deb2ab63f3afdda15ac61eabbb4c53567",
+          "sha1": "5f00ebad15a978f57d50198dcd4633a3605038d1",
+          "md5": "4660dfb2b7c955fc9cec73833304a5f0"
+        }
+      ]
+    },
+    {
+      "name": "devReleaseVariantDevReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.altbeacon",
+          "module": "android-beacon-library",
+          "version": {
+            "requires": "2.20"
+          }
+        },
+        {
+          "group": "com.google.android.play",
+          "module": "integrity",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "4.12.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp-sse",
+          "version": {
+            "requires": "4.12.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.11.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-kotlinx-serialization",
+          "version": {
+            "requires": "2.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.8.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-play-services",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.12.0"
+          }
+        },
+        {
+          "group": "androidx.annotation",
+          "module": "annotation-experimental",
+          "version": {
+            "requires": "1.4.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gopass-kiosk-sdk-dev-1.0.2.aar",
+          "url": "gopass-kiosk-sdk-dev-1.0.2.aar",
+          "size": 44724228,
+          "sha512": "d4dd8ed340208b330c332d1a6736f267573fcce6536a873fca3dcdd8540348471b785a39fb6454e893822fac3efb907344d02eca371abc1f1fa5fc6760f0341b",
+          "sha256": "41be6c3d1a5258ccadd93318b6ddae6deb2ab63f3afdda15ac61eabbb4c53567",
+          "sha1": "5f00ebad15a978f57d50198dcd4633a3605038d1",
+          "md5": "4660dfb2b7c955fc9cec73833304a5f0"
+        }
+      ]
+    },
+    {
+      "name": "devReleaseVariantDevReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "gopass-kiosk-sdk-dev-1.0.2-sources.jar",
+          "url": "gopass-kiosk-sdk-dev-1.0.2-sources.jar",
+          "size": 97137,
+          "sha512": "8e04ace0ac8819f6ea00088be3dda78bdeb2fcdc11892d18bfdf8f93d49c0734a8c8bb3400a9449b3464bf1b007f443d5270ad4c20867a9be3d6b082283a8783",
+          "sha256": "d80484f1b15e23a266c4689c67804f892b2e1f8f14f2c0311c685965209e8bd9",
+          "sha1": "5ed68083be96fe53fdebd05a803f3830dca92639",
+          "md5": "19e137b0fa1c07541651504c50408362"
+        }
+      ]
+    }
+  ]
+}
