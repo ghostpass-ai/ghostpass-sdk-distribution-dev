@@ -1,0 +1,173 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.ghostpass",
+    "module": "gopass-user-sdk-dev",
+    "version": "1.0.5",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.13"
+    }
+  },
+  "variants": [
+    {
+      "name": "devReleaseVariantDevReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gopass-user-sdk-dev-1.0.5.aar",
+          "url": "gopass-user-sdk-dev-1.0.5.aar",
+          "size": 44839479,
+          "sha512": "b2aaf91e6cdbd0eae2c4cef7821a91968f2c8d3af4cdfa645644bce08206675aa29f0da341c8242337bd0879d2fff2b2532c3d14b8e17704417bc891c498fa8a",
+          "sha256": "8df17d739659de43e0c87357456076d717bd657ff75a8f5304792a1a53ec91dc",
+          "sha1": "7b4f31579262c5a1835298be067b3e4ed519db6d",
+          "md5": "9fdef0f4328bf560e7cd8420cd1a9897"
+        }
+      ]
+    },
+    {
+      "name": "devReleaseVariantDevReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.8.0"
+          }
+        },
+        {
+          "group": "com.google.android.play",
+          "module": "integrity",
+          "version": {
+            "requires": "1.6.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-play-services",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp",
+          "version": {
+            "requires": "4.12.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "okhttp-sse",
+          "version": {
+            "requires": "4.12.0"
+          }
+        },
+        {
+          "group": "com.squareup.okhttp3",
+          "module": "logging-interceptor",
+          "version": {
+            "requires": "4.12.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "retrofit",
+          "version": {
+            "requires": "2.11.0"
+          }
+        },
+        {
+          "group": "com.squareup.retrofit2",
+          "module": "converter-kotlinx-serialization",
+          "version": {
+            "requires": "2.11.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.15.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gopass-user-sdk-dev-1.0.5.aar",
+          "url": "gopass-user-sdk-dev-1.0.5.aar",
+          "size": 44839479,
+          "sha512": "b2aaf91e6cdbd0eae2c4cef7821a91968f2c8d3af4cdfa645644bce08206675aa29f0da341c8242337bd0879d2fff2b2532c3d14b8e17704417bc891c498fa8a",
+          "sha256": "8df17d739659de43e0c87357456076d717bd657ff75a8f5304792a1a53ec91dc",
+          "sha1": "7b4f31579262c5a1835298be067b3e4ed519db6d",
+          "md5": "9fdef0f4328bf560e7cd8420cd1a9897"
+        }
+      ]
+    },
+    {
+      "name": "devReleaseVariantDevReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "gopass-user-sdk-dev-1.0.5-sources.jar",
+          "url": "gopass-user-sdk-dev-1.0.5-sources.jar",
+          "size": 131126,
+          "sha512": "5d2c0021b5024b747a49bf2874c194d06bb130e1e1a3fdf10b3a3a00cdc40788bc59acf0ecb45e989fc138f616b6960ee8b7866d57e42b5ca06ffc81b0ca7729",
+          "sha256": "5bc071749b9e692060358942bf9dc595d5380c7b1b580ac0409d24a28948bb4a",
+          "sha1": "7b7372de44d2fe3cb67b55fbd5116a88cc4206a0",
+          "md5": "72026b0d66d96e68d5af6a6fc7b2d475"
+        }
+      ]
+    }
+  ]
+}
