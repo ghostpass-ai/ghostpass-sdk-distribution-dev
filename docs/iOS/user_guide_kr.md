@@ -1,7 +1,7 @@
 # GhostPass iOS SDK — 개발자 문서
 
 > **버전** 1.0.0 · **지원 플랫폼** iOS 15.0+ · **배포 형식** SPM, CocoaPod  
-> **최종 업데이트** 2026년 4월 20일
+> **최종 업데이트** 2026년 7월 15일
 
 ---
 
@@ -22,10 +22,12 @@
 ### 1.1 GhostPass SDK란?
 
 GhostPass SDK는 iOS 앱에 **비접촉 생체 정보 인식 인증**을 손쉽게 통합할 수 있는 보안 SDK입니다.  
-Liveness Detection(위조 방지), 얼굴 특징 추출, 서버 연동을 모두 내부에서 처리하므로, 파트너 개발자가 직접 다뤄야 할 것은 **딱 3가지**입니다.
+Liveness Detection(위조 방지), 얼굴 특징 추출, 서버 연동을 모두 내부에서 처리합니다. 파트너 앱은 아래 핵심 API로 SDK 수명 주기와 비콘 모니터링을 제어할 수 있습니다.
 
 ```
-initialize(apiKey:)  →  registerBioData(imageBytes:)  →  (필요시) removeBioData()
+initialize(apiKey:)  →  registerBioData(imageBytes:)
+                      →  (필요시) stopMonitoring() / startMonitoring()
+                      →  (필요시) removeBioData()
 ```
 
 ### 1.2 주요 기능
@@ -63,6 +65,8 @@ GhostPass SDK는 **API Key 한 줄**로 연동을 시작하며, 내부 보안 �
 | 생체 데이터 등록 여부 | `hasBioData()` | 생체 데이터 등록 여부 및 등록 일자 반환 |
 | 생체 정보 등록 | `registerBioData(imageBytes:)` | 생체 정보 추출 · Liveness 검사 · 특징 추출 · 안전한 저장 |
 | 생체 정보 삭제 | `removeBioData()` | 생체 정보 삭제 · 비콘 스캔 종료 |
+| 비콘 모니터링 시작 | `startMonitoring()` | 권한과 생체 정보 확인 · 비콘 모니터링 시작 |
+| 비콘 모니터링 중지 | `stopMonitoring()` | 비콘 모니터링 종료 · SDK 내부 자동 시작 차단 |
 | SDK 초기화 상태 복구 | `reset()` | 모든 SDK 데이터 초기화 · 비콘 스캔 종료 |
 | 에러 리스너 | `NotificationCenter` 옵저버 등록 | 비콘 스캔 · 근접 인증 등 SDK 자율 동작 중 발생한 에러를 앱에 통지 |
 
@@ -478,21 +482,70 @@ if result.hasBioData {
 
 ---
 
-### 4.5 SDK 초기화 상태 복구
+### 4.5 비콘 모니터링 시작
+
+권한 승인 후 또는 `stopMonitoring()`으로 중지한 비콘 모니터링을 다시 시작할 때 사용합니다.
+SDK 초기화와 생체 정보 등록이 완료되어 있어야 합니다.
+
+> **참고**: 생체 정보가 등록된 상태에서 `initialize(apiKey:)` 또는 `registerBioData(imageBytes:)`가 성공하면 SDK가 모니터링을 자동으로 시작하므로 일반적으로 직접 호출할 필요가 없습니다.
+
+#### 4.5.1 API 형태 및 설명
+
+``` swift
+@discardableResult
+public func startMonitoring() async -> Bool
+```
+
+모니터링이 시작되었거나 이미 실행 중이면 `true`를 반환합니다. 시작하지 못하면 `false`를 반환하며, 실패 원인은 [`.onServiceError`](#48-에러-리스너) 알림으로 전달됩니다.
+위치 권한이 아직 결정되지 않은 경우 권한을 요청하고 `false`를 반환하며, 사용자가 권한을 허용하면 SDK가 자동으로 시작을 다시 시도합니다.
+
+#### 4.5.2 예시
+
+``` swift
+let isMonitoring = await GoPass.shared.startMonitoring()
+
+if !isMonitoring {
+    // 권한 요청 진행 여부 또는 실패 원인은 .onServiceError 옵저버에서 처리
+}
+```
+
+---
+
+### 4.6 비콘 모니터링 중지
+
+비콘 모니터링을 수동으로 중지합니다. 이미 중지된 상태에서 호출해도 안전합니다.
+
+> **주의**: 호출 후에는 SDK 내부의 자동 시작도 차단됩니다. 모니터링을 재개하려면 `startMonitoring()`을 직접 호출해야 합니다.
+
+#### 4.6.1 API 형태 및 설명
+
+``` swift
+public func stopMonitoring() async
+```
+
+#### 4.6.2 예시
+
+``` swift
+await GoPass.shared.stopMonitoring()
+```
+
+---
+
+### 4.7 SDK 초기화 상태 복구
 
 SDK 내부 데이터(생체 데이터, 보안 채널, 세션 등)를 모두 삭제하고 초기 상태로 복구합니다.  
 회원 탈퇴, 계정 전환 등 SDK 전체를 처음 상태로 되돌려야 할 때 사용합니다.
 
 > ⚠️ **주의**: `reset()` 호출 후 SDK를 다시 사용하려면 `initialize(apiKey:)`를 재호출해야 합니다.
 
-#### 4.5.1 API 형태 및 설명
+#### 4.7.1 API 형태 및 설명
 
 ``` swift
 // SDK 전체 초기화 상태 복구
 public func reset() async throws
 ```
 
-#### 4.5.2 예시
+#### 4.7.2 예시
 ``` swift
 func resetSDK() {
     Task {
@@ -508,17 +561,17 @@ func resetSDK() {
 
 ---
 
-### 4.6 에러 리스너
+### 4.8 에러 리스너
 
 비콘 탐지 및 인증을 수행하며 발생할 수 있는 에러를 구독하여 리스닝합니다.  
 [6.1.1 GP0xx](#611-gp0xx--백그라운드-서비스-onserviceerror)에 해당하는 에러에 대하여 모두 addObserver를 세팅합니다.
 
-#### 4.6.1 API 형태 및 설명
+#### 4.8.1 API 형태 및 설명
 ``` swift
 NotificationCenter.default.addObserver(forName: .onServiceError, object: nil, queue: .main) { }
 ```
 
-#### 4.6.2 예시
+#### 4.8.2 예시
 ``` swift
 NotificationCenter.default.addObserver(
     forName: .onServiceError,
@@ -734,6 +787,7 @@ Ghostpass SDK를 사용하며 발견될 수 있는 에러 코드입니다.
 | GP004 | `.locationPermissionInsufficient` | 위치 서비스 권한이 부족합니다. |
 | GP005 | `.beaconUuidNotFound` | 인증 정보를 확인할 수 없습니다. |
 | GP006 | `.networkDisconnected` | 네트워크 연결을 확인해주세요. |
+| GP007 | `.bioDataNotFound` | 생체 정보가 등록되어 있지 않습니다. |
 
 #### 6.1.2 GP1xx — `initialize(apiKey:)`
 

@@ -1,6 +1,6 @@
 # GhostPass SDK — 에러 코드 정의
 
-> **최종 업데이트** 2026년 4월 20일
+> **최종 업데이트** 2026년 7월 15일
 
 ---
 
@@ -50,6 +50,9 @@ User App SDK와 Kiosk SDK는 **독립된 SDK**이므로 동일한 GP 코드 번�
 | GP004 | 위치 서비스 권한이 부족합니다. | 설정에서 '항상 허용'으로 변경 안내 |
 | GP005 | 인증 정보를 확인할 수 없습니다. | initialize() 재시도 |
 | GP006 | 네트워크 연결을 확인해주세요. | 네트워크 상태 확인 안내 |
+| GP007 | 생체 정보가 등록되어 있지 않습니다. | `registerBioData(imageBytes:)` 완료 후 `startMonitoring()` 재호출 |
+
+> `GP007`은 iOS User App SDK의 `startMonitoring()` 호출 시 전달됩니다.
 
 ### 2.2 GP1xx — `initialize(apiKey:)`
 

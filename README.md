@@ -585,7 +585,24 @@ case .success:
 try await GoPass.shared.removeBioData()
 ```
 
-### 3.7 SDK 초기화 상태 복구
+### 3.7 비콘 모니터링 시작
+
+생체 정보가 등록된 상태에서 초기화 또는 얼굴 등록이 완료되면 SDK가 비콘 모니터링을 자동으로 시작합니다. 권한 승인 후 또는 수동 중지 후 다시 시작해야 할 때 호출하세요.
+
+```swift
+let isMonitoring = await GoPass.shared.startMonitoring()
+// 실패 시 false 반환, 상세 원인은 .onServiceError 알림으로 전달
+```
+
+### 3.8 비콘 모니터링 중지
+
+```swift
+await GoPass.shared.stopMonitoring()
+```
+
+`stopMonitoring()` 호출 후에는 SDK 내부의 자동 시작도 차단됩니다. 다시 시작하려면 `startMonitoring()`을 직접 호출해야 합니다.
+
+### 3.9 SDK 초기화 상태 복구
 
 회원 탈퇴, 계정 전환 등 SDK 전체를 처음 상태로 되돌려야 할 때 사용합니다.
 
@@ -594,7 +611,7 @@ try await GoPass.shared.reset()
 // 이후 SDK를 다시 사용하려면 initialize(apiKey:) 재호출 필요
 ```
 
-### 3.8 HandsFree 인증 (선택)
+### 3.10 HandsFree 인증 (선택)
 
 키오스크가 생성한 인증 세션을 FCM Push로 수신하여, 사용자 조작 없이 자동으로 인증을 처리합니다.
 
